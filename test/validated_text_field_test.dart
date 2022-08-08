@@ -41,7 +41,7 @@ Widget _getDefaultField(Kek initialInput) => _getValidatedField(
       ValidatedTextInputField<Kek, KekError>(
         key: _defaultKey,
         initialInput: initialInput,
-        standardErrorText: 'failure',
+        fallbackErrorText: 'failure',
         getErrorSpecificText: (error) => error.toString(),
       ),
     );
@@ -144,7 +144,7 @@ void main() {
       await tester.pumpWidget(_getValidatedField(ValidatedTextInputField(
         key: _defaultKey,
         initialInput: Kek.pure(),
-        standardErrorText: 'failure',
+        fallbackErrorText: 'failure',
         getErrorSpecificText: (error) => error.toString(),
         hideErrorMessageUntilFirstSubmit: true,
       )));

@@ -7,7 +7,7 @@ class ValidatedTextInputField<T extends FormzInput<String, E>, E>
   final Function(String)? onChanged;
   final void Function(String)? onSubmitted;
   final String Function(E)? getErrorSpecificText;
-  final String standardErrorText;
+  final String? fallbackErrorText;
   final TextInputType keyboardType;
   final int errorDisplayThreshold;
   final InputDecoration inputDecoration;
@@ -15,7 +15,7 @@ class ValidatedTextInputField<T extends FormzInput<String, E>, E>
   const ValidatedTextInputField({
     Key? key,
     required this.initialInput,
-    required this.standardErrorText,
+    this.fallbackErrorText,
     this.inputDecoration = const InputDecoration(
       errorStyle: TextStyle(color: Colors.red),
     ),
@@ -57,7 +57,8 @@ class _ValidatedTextInputFieldState<E> extends State<ValidatedTextInputField> {
         _isValid = false;
         if (newValue.length >= widget.errorDisplayThreshold) {
           _errorMessage = widget.getErrorSpecificText?.call(validationResult) ??
-              widget.standardErrorText;
+              widget.fallbackErrorText ??
+              'failure';
         }
       }
     });
