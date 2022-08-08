@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:formz/formz.dart';
 
-class ValidatedTextInputField<T extends FormzInput<String, E>, E>
+class ValidatedTextInputField<T extends FormzInput>
+// class ValidatedTextInputField<T extends FormzInput<String, E>, E>
     extends StatefulWidget {
   final T initialInput;
   final Function(String)? onChanged;
   final void Function(String)? onSubmitted;
-  final String Function(E)? getErrorSpecificText;
+  final String Function(dynamic)? getErrorSpecificText;
   final String? fallbackErrorText;
   final TextInputType keyboardType;
   final int errorDisplayThreshold;
@@ -29,11 +30,11 @@ class ValidatedTextInputField<T extends FormzInput<String, E>, E>
 
   @override
   // ignore: library_private_types_in_public_api
-  _ValidatedTextInputFieldState<E> createState() =>
-      _ValidatedTextInputFieldState<E>();
+  _ValidatedTextInputFieldState createState() =>
+      _ValidatedTextInputFieldState();
 }
 
-class _ValidatedTextInputFieldState<E> extends State<ValidatedTextInputField> {
+class _ValidatedTextInputFieldState extends State<ValidatedTextInputField> {
   final _controller = TextEditingController();
   bool _isValid = false;
   bool _hasSubmitted = false;
@@ -49,7 +50,7 @@ class _ValidatedTextInputFieldState<E> extends State<ValidatedTextInputField> {
   }
 
   void _onTextChanged(String newValue) async {
-    final E? validationResult = widget.initialInput.validator(newValue);
+    final dynamic validationResult = widget.initialInput.validator(newValue);
     setState(() {
       if (validationResult == null) {
         _isValid = true;

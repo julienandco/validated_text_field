@@ -38,7 +38,7 @@ Widget _getValidatedField(ValidatedTextInputField field) => MaterialApp(
     );
 
 Widget _getDefaultField(Kek initialInput) => _getValidatedField(
-      ValidatedTextInputField<Kek, KekError>(
+      ValidatedTextInputField<Kek>(
         key: _defaultKey,
         initialInput: initialInput,
         fallbackErrorText: 'failure',
